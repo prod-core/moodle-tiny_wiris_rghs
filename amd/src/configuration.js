@@ -10,14 +10,8 @@ import {
 const TINY_EQUATION = 'tiny_equation';
 
 const configureMenu = (menu) => {
-    if (menu.insert.items.includes(TINY_EQUATION)) {
-        // By Moodle's recommendation, we replace the default formula editor with MathType and ChemType
-        menu.insert.items = menu.insert.items.replace(TINY_EQUATION, `${imageButtonNameMathType} ${imageButtonNameChemType}`);
-    } else {
-        // If the default equation editor wasn't enabled, we just add MathType and ChemType
-        addMenubarItem(menu, 'insert', imageButtonNameMathType);
-        addMenubarItem(menu, 'insert', imageButtonNameChemType);
-    }
+    addMenubarItem(menu, 'insert', imageButtonNameMathType);
+    addMenubarItem(menu, 'insert', imageButtonNameChemType);
 
     return menu;
 };
@@ -29,7 +23,7 @@ const configureToolbar = (toolbar) => {
     toolbar = toolbar.map((section) => {
         const buttonIndex = section.items.indexOf(TINY_EQUATION);
         if (buttonIndex > -1) {
-            section.items.splice(buttonIndex, 1, imageButtonNameMathType, imageButtonNameChemType);
+            section.items.splice(buttonIndex + 1, 1, imageButtonNameMathType, imageButtonNameChemType);
         }
         return section;
     });
